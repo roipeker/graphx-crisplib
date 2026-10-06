@@ -1,3 +1,9 @@
+## 0.1.0-dev.3
+
+- Label generated 6x6 font glyphs with their ASCII character and Unicode code point.
+- Generate named ASCII bounds used by atlas lookup.
+- Ensure generated font glyphs obey the current draw color through `char()`.
+
 ## 0.1.0-dev.2
 
 - Use Git tag-pattern version solving for GraphX.

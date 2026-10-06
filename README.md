@@ -55,7 +55,7 @@ dependencies:
     git:
       url: https://github.com/roipeker/graphx-crisplib.git
       tag_pattern: v{{version}}
-    version: ^0.1.0-dev.2
+    version: ^0.1.0-dev.3
 ```
 
 If the app does not import GraphX directly, the explicit `graphx` entry may be
