@@ -79,7 +79,9 @@ final class CrispAtlas {
   CrispAtlasRegion? textGlyph(String char) {
     if (char.length != 1 || char == ' ') return null;
     final code = char.codeUnitAt(0);
-    if (code < crispTextFirstCodePoint || code > crispTextLastCodePoint) {\n      return null;\n    }
+    if (code < crispTextFirstCodePoint || code > crispTextLastCodePoint) {
+      return null;
+    }
     return _regions['text:$code'];
   }
 
