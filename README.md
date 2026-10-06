@@ -40,15 +40,26 @@ final class MyGame extends CrispGame {
 
 ## Dependency
 
-This package is consumed directly from GitHub:
+Use Dart 3.9+ Git tag version solving so Crisplib and GraphX can share compatible
+Git versions without literal-ref source conflicts:
 
 ```yaml
 dependencies:
+  graphx:
+    git:
+      url: https://github.com/roipeker/graphx2.git
+      tag_pattern: v{{version}}
+    version: ^2.0.0-dev.2
+
   graphx_crisplib:
     git:
       url: https://github.com/roipeker/graphx-crisplib.git
-      ref: v0.1.0-dev.1
+      tag_pattern: v{{version}}
+    version: ^0.1.0-dev.2
 ```
+
+If the app does not import GraphX directly, the explicit `graphx` entry may be
+omitted; Crisplib resolves it transitively.
 
 ## Licensing
 
