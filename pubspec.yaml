@@ -1,0 +1,22 @@
+name: graphx_crisplib
+description: Tiny Crisp-inspired immediate-mode game runtime for GraphX 2.
+version: 0.1.0-dev.1
+publish_to: none
+repository: https://github.com/roipeker/graphx-crisplib
+
+environment:
+  sdk: ^3.12.2
+  flutter: ">=3.35.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  graphx:
+    git:
+      url: https://github.com/roipeker/graphx2.git
+      ref: v2.0.0-dev.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
