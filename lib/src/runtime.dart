@@ -409,7 +409,8 @@ final class CrispRuntime {
   }
 
   CrispHit character(String char, double x, double y, {double scale = 1}) {
-    final region = atlas.character(game.id, char) ?? atlas.textGlyph(char);
+    final customRegion = atlas.character(game.id, char);
+    final region = customRegion ?? atlas.textGlyph(char);
     if (region == null) return CrispHit.none;
     final w = region.width * scale;
     final h = region.height * scale;
@@ -430,7 +431,7 @@ final class CrispRuntime {
         ..h = h
         ..color = currentColor
         ..region = region
-        ..tint = currentColor != CrispColor.black;
+        ..tint = customRegion == null || currentColor != CrispColor.black;
       _register(shape);
     }
     return hit;
