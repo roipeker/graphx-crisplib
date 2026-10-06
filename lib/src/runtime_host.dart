@@ -35,7 +35,7 @@ final class CrispRoot extends GRoot {
       (h * dpr / runtime.height).floor(),
     );
     final integer = physical >= 1 ? physical / dpr : fit;
-    _scale = switch (runtime.game.config.scaleMode) {
+    _scale = switch (runtime.config.scaleMode) {
       CrispScaleMode.integer => integer,
       CrispScaleMode.fit => fit,
       CrispScaleMode.auto => integer > 0 && integer / fit >= .9 ? integer : fit,

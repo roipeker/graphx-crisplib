@@ -1,3 +1,9 @@
+## 0.1.0-dev.4
+
+- Move game identity, title, description, seed, and logical-stage settings into `CrispGameConfig`.
+- Make `description` optional.
+- Cache the resolved game config in the runtime.
+
 ## 0.1.0-dev.3
 
 - Label generated 6x6 font glyphs with their ASCII character and Unicode code point.

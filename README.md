@@ -7,16 +7,12 @@ The goal is deliberately small game code: one `frame()` callback, a fixed logica
 ```dart
 final class MyGame extends CrispGame {
   @override
-  String get id => 'my_game';
-
-  @override
-  String get title => 'MY GAME';
-
-  @override
-  String get description => '[TAP] PLAY';
-
-  @override
-  int get seed => 1;
+  final config = const CrispGameConfig(
+    id: 'my_game',
+    title: 'MY GAME',
+    description: '[TAP] PLAY',
+    seed: 1,
+  );
 
   @override
   void frame(CrispContext g) {
@@ -55,7 +51,7 @@ dependencies:
     git:
       url: https://github.com/roipeker/graphx-crisplib.git
       tag_pattern: v{{version}}
-    version: ^0.1.0-dev.3
+    version: ^0.1.0-dev.4
 ```
 
 If the app does not import GraphX directly, the explicit `graphx` entry may be

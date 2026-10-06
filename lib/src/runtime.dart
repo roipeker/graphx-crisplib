@@ -13,11 +13,19 @@ enum CrispScaleMode { auto, integer, fit }
 
 final class CrispGameConfig {
   const CrispGameConfig({
+    required this.id,
+    required this.title,
+    this.description,
+    this.seed = 1,
     this.width = 320,
     this.height = 180,
     this.scaleMode = CrispScaleMode.auto,
   });
 
+  final String id;
+  final String title;
+  final String? description;
+  final int seed;
   final double width;
   final double height;
   final CrispScaleMode scaleMode;
@@ -26,11 +34,7 @@ final class CrispGameConfig {
 }
 
 abstract class CrispGame {
-  String get id;
-  String get title;
-  String get description;
-  int get seed;
-  CrispGameConfig get config => const CrispGameConfig();
+  CrispGameConfig get config;
   List<String> get characters => const <String>[];
   List<CrispSpriteClip> get sprites => const <CrispSpriteClip>[];
 
@@ -240,16 +244,19 @@ final class CrispCollisionColors {
 }
 
 final class CrispRuntime {
-  CrispRuntime(this.game, this.atlas) : rng = CrispRandom(game.seed) {
+  CrispRuntime(this.game, this.atlas) {
+    config = game.config;
+    rng = CrispRandom(config.seed);
     context = CrispContext._(this);
   }
 
-  double get width => game.config.width;
-  double get height => game.config.height;
+  double get width => config.width;
+  double get height => config.height;
 
   final CrispGame game;
   final CrispAtlas atlas;
-  final CrispRandom rng;
+  late final CrispGameConfig config;
+  late final CrispRandom rng;
   late final CrispContext context;
 
   final List<_DrawCommand> _commands = <_DrawCommand>[];
@@ -279,14 +286,14 @@ final class CrispRuntime {
         tick = 0;
         scoreValue = 0;
         ended = false;
-        rng.reset(game.seed);
+        rng.reset(config.seed);
         _particles.clear();
       }
       return;
     }
 
     game.frame(context);
-    _drawOverlayText(game.title, 4, 4, CrispColor.black, 1);
+    _drawOverlayText(config.title, 4, 4, CrispColor.black, 1);
     final scoreText = scoreValue.toString();
     _drawOverlayText(
       scoreText,
@@ -295,9 +302,10 @@ final class CrispRuntime {
       CrispColor.black,
       1,
     );
-    if (tick < 120) {
+    final description = config.description;
+    if (tick < 120 && description != null && description.isNotEmpty) {
       _drawOverlayText(
-        game.description.toUpperCase(),
+        description.toUpperCase(),
         4,
         height - 16,
         CrispColor.lightBlack,
@@ -409,7 +417,7 @@ final class CrispRuntime {
   }
 
   CrispHit character(String char, double x, double y, {double scale = 1}) {
-    final customRegion = atlas.character(game.id, char);
+    final customRegion = atlas.character(config.id, char);
     final region = customRegion ?? atlas.textGlyph(char);
     if (region == null) return CrispHit.none;
     final w = region.width * scale;
@@ -447,7 +455,7 @@ final class CrispRuntime {
     CrispColor? tint,
     CrispHitbox? hitbox,
   }) {
-    final region = atlas.sprite(game.id, frame);
+    final region = atlas.sprite(config.id, frame);
     if (region == null) return CrispHit.none;
 
     final w = region.width * scale;

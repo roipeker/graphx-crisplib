@@ -1,6 +1,6 @@
 name: graphx_crisplib
 description: Tiny Crisp-inspired immediate-mode game runtime for GraphX 2.
-version: 0.1.0-dev.3
+version: 0.1.0-dev.4
 publish_to: none
 repository: https://github.com/roipeker/graphx-crisplib
 

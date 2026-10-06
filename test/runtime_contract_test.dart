@@ -78,19 +78,12 @@ llllll
 
 final class _ClipGame extends CrispGame {
   @override
-  String get id => 'clip';
-
-  @override
-  String get title => 'T';
-
-  @override
-  String get description => '';
-
-  @override
-  int get seed => 1;
-
-  @override
-  CrispGameConfig get config => const CrispGameConfig(width: 50, height: 50);
+  final config = const CrispGameConfig(
+    id: 'clip',
+    title: 'T',
+    width: 50,
+    height: 50,
+  );
 
   @override
   void frame(CrispContext g) {
