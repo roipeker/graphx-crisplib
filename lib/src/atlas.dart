@@ -79,7 +79,7 @@ final class CrispAtlas {
   CrispAtlasRegion? textGlyph(String char) {
     if (char.length != 1 || char == ' ') return null;
     final code = char.codeUnitAt(0);
-    if (code < 0x21 || code > 0x7e) return null;
+    if (code < crispTextFirstCodePoint || code > crispTextLastCodePoint) {\n      return null;\n    }
     return _regions['text:$code'];
   }
 
@@ -96,7 +96,7 @@ final class CrispAtlas {
     final entries = <_AtlasEntry>[
       for (var i = 0; i < crispTextPatterns.length; i++)
         _AtlasEntry(
-          'text:${0x21 + i}',
+          'text:${crispTextFirstCodePoint + i}',
           crispTextPatterns[i],
           textOnly: true,
           fixedWidth: glyphWidth,
